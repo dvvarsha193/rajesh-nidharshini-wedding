@@ -2081,7 +2081,7 @@ body[data-lang="te"] .cursive-subtitle {
 body[data-lang="te"] .groom-name,
 body[data-lang="te"] .bride-name {
   font-family: 'Noto Serif Telugu', serif;
-  font-size: clamp(0.72rem, 2.4vw, 1.25rem);
+  font-size: clamp(1.0rem, 3.2vw, 1.28rem);
   font-weight: 800;
   line-height: 1.25;
   word-break: break-word;
@@ -2126,7 +2126,7 @@ body[data-lang="te"] .family-head-name {
     overflow-x: hidden !important;
   }
   .intro-royal-hall {
-    padding: 24px 10px;
+    padding: 58px 10px 20px !important;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -2186,6 +2186,14 @@ body[data-lang="te"] .family-head-name {
     letter-spacing: 0.5px !important;
     word-break: break-word !important;
     text-align: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+    max-width: 96% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
   .miniature-speech-bubble {
     padding: 8px 14px;
@@ -2281,7 +2289,7 @@ body[data-lang="te"] .family-head-name {
     font-size: 0.88rem;
     padding: 0 4px;
   }
-  /* COUPLE HERO NAMES - PERFECT CONTAINMENT & EQUAL SIZING */
+  /* COUPLE HERO NAMES - MAJESTIC TYPOGRAPHY, PERFECT PROPORTIONS & GOLD ACCENTS */
   .couple-hero-names {
     display: flex !important;
     flex-direction: row !important;
@@ -2289,7 +2297,7 @@ body[data-lang="te"] .family-head-name {
     justify-content: center !important;
     align-items: stretch !important;
     gap: 4px !important;
-    margin: 16px 0 14px !important;
+    margin: 18px 0 16px !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
@@ -2299,57 +2307,74 @@ body[data-lang="te"] .family-head-name {
     min-width: 0 !important;
     width: calc(50% - 10px) !important;
     max-width: calc(50% - 10px) !important;
-    padding: 10px 4px !important;
+    padding: 16px 8px 14px !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
     box-sizing: border-box !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
     overflow: hidden !important;
+    background: linear-gradient(165deg, #FFFFFF 0%, #FFFDF9 55%, #FBF4E8 100%) !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.65) !important;
+    box-shadow: 0 4px 18px rgba(102, 16, 31, 0.08), inset 0 0 16px rgba(255, 248, 220, 0.5) !important;
+    gap: 6px !important;
+    position: relative !important;
   }
   .wedding-knot-symbol {
     flex: 0 0 auto !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    z-index: 2 !important;
-    margin: 0 -8px !important;
+    z-index: 3 !important;
+    margin: 0 -10px !important;
+    align-self: center !important;
   }
   .knot-circle {
-    width: 32px !important;
-    height: 32px !important;
+    width: 36px !important;
+    height: 36px !important;
     border-radius: 50% !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.18) !important;
-    border: 1px solid rgba(255, 255, 255, 0.7) !important;
+    background: linear-gradient(135deg, #FFE082 0%, #D4AF37 50%, #B8860B 100%) !important;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.5), 0 0 14px rgba(212, 175, 55, 0.3) !important;
+    border: 2px solid #FFFFFF !important;
   }
   .knot-circle .knot-with {
-    font-size: 0.65rem !important;
+    font-size: 0.68rem !important;
     line-height: 0.8 !important;
+    color: #4A0404 !important;
+    font-weight: 700 !important;
   }
   .knot-circle .knot-icon {
-    font-size: 0.65rem !important;
+    font-size: 0.68rem !important;
     line-height: 0.8 !important;
   }
   .honorific {
-    min-height: 20px !important;
+    min-height: 18px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: clamp(0.62rem, 2vw, 0.74rem) !important;
-    margin-bottom: 3px !important;
+    font-size: clamp(0.72rem, 2.3vw, 0.84rem) !important;
+    font-family: var(--font-subroyal) !important;
+    color: #B8860B !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.2px !important;
+    margin-bottom: 2px !important;
     text-align: center !important;
+    line-height: 1 !important;
   }
   .groom-name, .bride-name {
-    flex: 1 1 auto !important;
+    flex: 0 1 auto !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-height: 42px !important;
-    font-size: clamp(0.72rem, 2.4vw, 0.95rem) !important;
-    line-height: 1.15 !important;
-    margin-bottom: 5px !important;
+    min-height: 48px !important;
+    font-size: clamp(1.02rem, 3.2vw, 1.30rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #5C0E1E !important;
+    text-shadow: 0 1px 1px rgba(212, 175, 55, 0.2) !important;
+    margin: 2px 0 4px 0 !important;
     word-break: break-word !important;
     overflow-wrap: anywhere !important;
     text-align: center !important;
@@ -2359,13 +2384,17 @@ body[data-lang="te"] .family-head-name {
     box-sizing: border-box !important;
   }
   .credentials-badge {
-    margin-top: auto !important;
-    font-size: clamp(0.52rem, 1.7vw, 0.66rem) !important;
-    padding: 2px 5px !important;
+    margin-top: 2px !important;
+    font-size: clamp(0.60rem, 1.9vw, 0.72rem) !important;
+    padding: 3px 8px !important;
     white-space: nowrap !important;
     border-radius: 16px !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+    background: linear-gradient(135deg, #7A0C22 0%, #4D0513 100%) !important;
+    border: 1px solid #D4AF37 !important;
+    color: #FFF9E6 !important;
+    box-shadow: 0 2px 8px rgba(92, 14, 30, 0.3) !important;
   }
   /* COUNTDOWN - ZERO OVERFLOW & GUARANTEED FIT */
   .countdown-container {
@@ -2566,11 +2595,11 @@ body[data-lang="te"] .family-head-name {
     font-size: 0.40rem !important;
   }
   .groom-name, .bride-name {
-    font-size: 0.72rem !important;
-    min-height: 38px !important;
+    font-size: 0.96rem !important;
+    min-height: 44px !important;
   }
   .groom-hero-card, .bride-hero-card {
-    padding: 8px 3px !important;
+    padding: 12px 4px 10px !important;
     width: calc(50% - 8px) !important;
     max-width: calc(50% - 8px) !important;
   }
