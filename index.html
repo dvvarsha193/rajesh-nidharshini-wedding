@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation | Rajesh Mani Kumar & Nidharshini</title>
+  <meta name="description" content="Royal Wedding Invitation of Chi. Rajesh Mani Kumar (IIT, B.Tech) & Chi. La. Sow. Nidharshini (IIT, M.Tech) on Friday, 27th November 2026 at ARM Convention, Guntur.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
+
+  <!-- Google Fonts: English Luxury & Telugu Traditional Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Serif+Telugu:wght@400;600;700;800&family=Ramabhadra&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Audio Preload for Immediate Playback -->
+  <link rel="preload" href="assets/wedding_bgm.mp3" as="audio">
+
+  <!-- Romantic Love BGM Audio Controller -->
+  <script src="audio.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="en">
+
+  <!-- Preloaded Audio Element with Immediate Autoplay -->
+  <audio id="wedding-bgm" src="assets/wedding_bgm.mp3" autoplay preload="auto" loop playsinline webkit-playsinline></audio>
+  <script>
+    // Immediate Autoplay Trigger on Click of Link
+    (function() {
+      const bgm = document.getElementById('wedding-bgm');
+      if (bgm) {
+        bgm.volume = 1.0;
+        const play = () => {
+          bgm.play().then(() => {
+            if (typeof updateAudioBtnState === 'function') updateAudioBtnState(true);
+          }).catch(() => {});
+        };
+        play();
+        const unlock = () => {
+          play();
+          ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown'].forEach(evt => {
+            window.removeEventListener(evt, unlock, true);
+            document.removeEventListener(evt, unlock, true);
+          });
+        };
+        ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown'].forEach(evt => {
+          window.addEventListener(evt, unlock, { capture: true, passive: true });
+          document.addEventListener(evt, unlock, { capture: true, passive: true });
+        });
+      }
+    })();
+  </script>
+
+  <!-- Falling Flower Petals Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- TOP FLOATING CONTROLS: LANGUAGE SWITCHER & ROMANTIC MUSIC -->
+  <header class="top-header-controls">
+    <!-- Language Toggle Switcher -->
+    <div class="lang-switcher">
+      <button id="lang-en-btn" class="lang-btn active" title="Switch to English">
+        <span>EN</span> <small>English</small>
+      </button>
+      <button id="lang-te-btn" class="lang-btn" title="తెలుగులోకి మార్చండి">
+        <span>తె</span> <small>తెలుగు</small>
+      </button>
+    </div>
+
+    <!-- Romantic Music Toggle -->
+    <div class="audio-control" id="audio-control-container">
+      <button id="audio-toggle-btn" class="audio-btn" title="Play Romantic Love BGM">
+        <i class="fas fa-heart"></i>
+        <span class="music-wave">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="audio-label" data-i18n="music_btn">Music On</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- BOTTOM FLOATING ACTION BUTTONS -->
+  <nav class="floating-nav">
+    <button id="replay-miniature-btn" class="floating-btn" title="Replay 3D Walk">
+      <i class="fas fa-film"></i>
+      <span data-i18n="nav_3d_walk">3D Walk</span>
+    </button>
+    <a href="#sumuhurtham" class="floating-btn" title="Muhurtham Time">
+      <i class="far fa-clock"></i>
+      <span data-i18n="nav_muhurtham">Muhurtham</span>
+    </a>
+    <a href="#venue" class="floating-btn" title="Map Directions">
+      <i class="fas fa-map-marked-alt"></i>
+      <span data-i18n="nav_venue">Venue</span>
+    </a>
+  </nav>
+
+  <!-- ============================================================== -->
+  <!-- 1. INTERACTIVE 3D MINIATURE INTRO SCREEN -->
+  <!-- ============================================================== -->
+  <section id="miniature-intro" class="miniature-intro-overlay">
+    <!-- Royal Palace Arches & Curtains -->
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    
+    <!-- Royal Invitation Envelope Gate & Wax Seal (Starts Music & Curtains on Tap) -->
+    <div id="invitation-gate" class="invitation-gate">
+      <div class="gate-content">
+        <div class="gate-mantra">॥ శ్రీరస్తు • శుభమస్తు • అవిఘ్నమస్తు ॥</div>
+        <div class="gate-badge">
+          <span class="gate-flourish">❦</span>
+          <span data-i18n="royal_wedding_tag">ROYAL WEDDING INVITATION</span>
+          <span class="gate-flourish">❦</span>
+        </div>
+        <h1 class="gate-names">
+          <span class="gate-groom" data-i18n="groom_short_name">Chi. Rajesh Mani Kumar</span>
+          <span class="gate-amp">&amp;</span>
+          <span class="gate-bride" data-i18n="bride_short_name">Chi. La. Sow. Nidharshini</span>
+        </h1>
+        <p class="gate-date" data-i18n="gate_date">Friday, 27th November 2026 • Guntur</p>
+        
+        <!-- Glowing Royal Wax Seal Button -->
+        <button id="open-envelope-btn" class="wax-seal-btn" title="Open Royal Wedding Invitation">
+          <div class="wax-seal-inner">
+            <span class="wax-seal-icon">💌</span>
+            <span class="wax-seal-text" data-i18n="gate_open_text">Open</span>
+          </div>
+        </button>
+        <p class="gate-sub-hint" data-i18n="gate_touch_hint">Touch anywhere to unseal &amp; enter with royal music</p>
+      </div>
+    </div>
+    
+    <div class="intro-royal-hall">
+      <div class="intro-blessing-text">
+        <!-- Sacred Telugu Invocations -->
+        <span class="sanskrit-mantra telugu-mantra">॥ శ్రీరస్తు • శుభమస్తు • అవిఘ్నమస్తు ॥</span>
+        <div class="royal-emblem">
+          <span class="namaste-icon">🙏</span>
+        </div>
+        <h2 class="intro-headline" data-i18n="intro_headline">Two Hearts, One Soul, A Divine Journey Begins</h2>
+        <p class="intro-subheadline" data-i18n="intro_subheadline">You are warmly welcomed to the auspicious union of</p>
+      </div>
+
+      <!-- 3D WEBGL ROYAL PALACE WALK ARENA WITH EXACT 3D MINIATURES -->
+      <div class="three-stage-wrapper" id="three-stage-wrapper">
+        <div id="three-stage" class="three-stage-canvas"></div>
+        <div class="three-stage-overlay-labels">
+          <div class="miniature-label-card groom">
+            <span class="role-badge" data-i18n="the_groom_badge">The Groom</span>
+            <span class="person-name" data-i18n="groom_short_name">Chi. Rajesh Mani Kumar</span>
+            <span class="person-degree">IIT, B.Tech</span>
+          </div>
+          <div class="center-sacred-namaste" id="center-namaste-tag">
+            <span class="namaste-badge">🪔 <span data-i18n="namaste_badge">Namaste</span> 🙏</span>
+          </div>
+          <div class="miniature-label-card bride">
+            <span class="role-badge" data-i18n="the_bride_badge">The Bride</span>
+            <span class="person-name" data-i18n="bride_short_name">Chi. La. Sow. Nidharshini</span>
+            <span class="person-degree">IIT, M.Tech</span>
+          </div>
+        </div>
+        <div class="parallax-3d-hint">
+          <i class="fas fa-cube"></i> <span data-i18n="3d_hint">Move mouse / tilt device for interactive 3D spatial depth</span>
+        </div>
+      </div>
+
+      <!-- Dialogue Bubble -->
+      <div class="miniature-speech-bubble" id="speech-bubble">
+        <p id="speech-text" data-i18n="intro_speech">🌸 "Walking towards our forever... Come join our joyous celebration!" 🌸</p>
+      </div>
+
+      <!-- Interactive Call To Action -->
+      <div class="intro-actions">
+        <button id="enter-invitation-btn" class="royal-open-btn">
+          <span class="btn-shimmer"></span>
+          <span class="btn-icon"><i class="fas fa-envelope-open-text"></i></span>
+          <span class="btn-text" data-i18n="enter_btn">Open Royal Invitation</span>
+          <span class="btn-arrow"><i class="fas fa-chevron-right"></i></span>
+        </button>
+        <p class="skip-hint" data-i18n="skip_hint">Click above or scroll down to enter</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 2. MAIN WEDDING INVITATION WEBSITE CONTENT -->
+  <!-- ============================================================== -->
+  <main id="main-content" class="invitation-container">
+
+    <!-- HERO HEADER: SACRED BLESSINGS & COUPLE INTRODUCTION -->
+    <header class="royal-hero-section">
+      <div class="mandala-backdrop"></div>
+      
+      <!-- Sacred Invocations in Traditional Telugu Script -->
+      <div class="sacred-trio">
+        <div class="trio-item">
+          <span class="telugu-head">శ్రీరస్తు</span>
+          <span class="translit">Sriprasthu</span>
+        </div>
+        <div class="trio-divider">✦</div>
+        <div class="trio-item main">
+          <div class="divine-icon-wrap">
+            <i class="fas fa-om"></i>
+          </div>
+          <span class="telugu-head">శుభమస్తు</span>
+          <span class="translit">Subhamasthu</span>
+        </div>
+        <div class="trio-divider">✦</div>
+        <div class="trio-item">
+          <span class="telugu-head">అవిఘ్నమస్తు</span>
+          <span class="translit">Avignamasthu</span>
+        </div>
+      </div>
+
+      <div class="invitation-crest">
+        <div class="crest-monogram">
+          <span class="g-letter">R</span>
+          <span class="ampersand">&</span>
+          <span class="b-letter">N</span>
+        </div>
+      </div>
+
+      <div class="formal-salutation">
+        <h3 class="cursive-subtitle" data-i18n="salutation_title">Wedding Invitation</h3>
+        <p class="solicitation-text" data-i18n="solicitation_text">
+          We solicit your gracious presence with family and friends on the auspicious occasion of the marriage of our Son
+        </p>
+      </div>
+
+      <!-- COUPLE TITLE SHOWCASE -->
+      <div class="couple-hero-names">
+        <div class="groom-hero-card">
+          <span class="honorific" data-i18n="groom_honorific">Chi.</span>
+          <h1 class="groom-name" data-i18n="groom_full_name">Rajesh Mani Kumar</h1>
+          <div class="credentials-badge">
+            <span class="badge-icon"><i class="fas fa-graduation-cap"></i></span>
+            <span class="badge-text">IIT, B.Tech.</span>
+          </div>
+        </div>
+
+        <div class="wedding-knot-symbol">
+          <div class="knot-circle">
+            <span class="knot-with" data-i18n="with_word">with</span>
+            <span class="knot-icon">💍</span>
+          </div>
+        </div>
+
+        <div class="bride-hero-card">
+          <span class="honorific" data-i18n="bride_honorific">Chi. La. Sow.</span>
+          <h1 class="bride-name" data-i18n="bride_full_name">Nidharshini</h1>
+          <div class="credentials-badge">
+            <span class="badge-icon"><i class="fas fa-graduation-cap"></i></span>
+            <span class="badge-text">IIT, M.Tech.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parentage Subtitle -->
+      <div class="parentage-banner">
+        <p class="parentage-text" data-i18n="parentage_text">
+          <span class="feather-decor">🪶</span>
+          Youngest Daughter of <strong>Sri Kallakula Pochala Rao</strong> & <strong>Smt. Sridevi</strong>, <em>Bhadrachalam</em>
+          <span class="feather-decor">🪶</span>
+        </p>
+      </div>
+
+      <!-- COUNTDOWN TIMER -->
+      <div class="countdown-container">
+        <div class="countdown-title">
+          <i class="far fa-clock"></i> <span data-i18n="countdown_title">Countdown to Muhurtham</span>
+        </div>
+        <div class="countdown-grid" id="countdown-timer">
+          <div class="count-box">
+            <span class="count-number" id="days">--</span>
+            <span class="count-unit" data-i18n="days_unit">Days</span>
+          </div>
+          <div class="count-divider">:</div>
+          <div class="count-box">
+            <span class="count-number" id="hours">--</span>
+            <span class="count-unit" data-i18n="hours_unit">Hours</span>
+          </div>
+          <div class="count-divider">:</div>
+          <div class="count-box">
+            <span class="count-number" id="minutes">--</span>
+            <span class="count-unit" data-i18n="minutes_unit">Minutes</span>
+          </div>
+          <div class="count-divider">:</div>
+          <div class="count-box">
+            <span class="count-number" id="seconds">--</span>
+            <span class="count-unit" data-i18n="seconds_unit">Seconds</span>
+          </div>
+        </div>
+        <div class="countdown-date-badge" data-i18n="countdown_badge">
+          <i class="fas fa-calendar-star"></i> Friday, 27th November 2026 • 09:25 PM
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION: THE SACRED SUMUHURTHAM & CEREMONIAL DETAILS -->
+    <section class="section-card sumuhurtham-section" id="sumuhurtham">
+      <div class="ornate-corner top-left"></div>
+      <div class="ornate-corner top-right"></div>
+      <div class="ornate-corner bottom-left"></div>
+      <div class="ornate-corner bottom-right"></div>
+
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="muhurtham_sec_title">Auspicious Sumuhurtham</h2>
+        <p class="section-subtitle" data-i18n="muhurtham_sec_subtitle">Sacred Vedic Muhurtham determined by planetary blessings</p>
+      </div>
+
+      <div class="muhurtham-highlight-box">
+        <div class="sacred-fire-icon">
+          <div class="flame-glow"></div>
+          <span>🪔</span>
+        </div>
+        <div class="muhurtham-details">
+          <span class="muhurtham-label" data-i18n="muhurtham_label">SUMUHURTHAM</span>
+          <div class="muhurtham-time-display">
+            <span class="date-big" data-i18n="muhurtham_date">Friday, 27th November 2026</span>
+            <span class="at-separator" data-i18n="at_separator">at</span>
+            <span class="time-big" data-i18n="muhurtham_time">9:25 PM</span>
+          </div>
+          <p class="muhurtham-desc" data-i18n="muhurtham_description">
+            In the divine lagna, amidst sacred Vedic chanting and the holy Jeelakarra Bellam ceremony, Chi. Rajesh Mani Kumar and Chi. La. Sow. Nidharshini enter lifelong matrimony.
+          </p>
+        </div>
+      </div>
+
+      <!-- Events Itinerary Grid -->
+      <div class="itinerary-grid">
+        <!-- Event 1: Dinner Feast -->
+        <div class="event-card dinner-card">
+          <div class="event-icon-circle">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="event-info">
+            <span class="event-tag" data-i18n="feast_tag">Royal Wedding Feast</span>
+            <h3 class="event-name" data-i18n="dinner_reception_title">Dinner Reception</h3>
+            <div class="event-time">
+              <i class="far fa-clock"></i> <span data-i18n="dinner_time">8:00 PM Onwards</span>
+            </div>
+            <p class="event-note" data-i18n="dinner_note">
+              Please join us for an exquisite traditional and multi-cuisine royal feast prepared with utmost love and warmth.
+            </p>
+          </div>
+        </div>
+
+        <!-- Event 2: Sumuhurtham Ceremony -->
+        <div class="event-card wedding-card">
+          <div class="event-icon-circle highlight">
+            <i class="fas fa-ring"></i>
+          </div>
+          <div class="event-info">
+            <span class="event-tag highlight" data-i18n="rituals_tag">Sacred Wedding Rituals</span>
+            <h3 class="event-name" data-i18n="ceremony_name">Kanyadaanam & Sumuhurtham</h3>
+            <div class="event-time">
+              <i class="far fa-clock"></i> <span data-i18n="ceremony_time">9:25 PM Exact Muhurtham</span>
+            </div>
+            <p class="event-note" data-i18n="ceremony_note">
+              Bless the couple during Mangalya Dharana, Talambralu, and Saptapadi as they take their sacred vows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: MEET THE ROYAL COUPLE -->
+    <section class="section-card couple-spotlight-section" id="couple">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="couple_sec_title">The Royal Couple</h2>
+        <p class="section-subtitle" data-i18n="couple_sec_subtitle">Two brilliant minds from IIT, destined to walk together in love</p>
+      </div>
+
+      <div class="couple-spotlight-grid">
+        <!-- Groom Card -->
+        <div class="person-profile-card groom-profile">
+          <div class="profile-frame">
+            <img src="assets/groom_3d_portrait.jpg" id="groom-profile-img" alt="Chi. Rajesh Mani Kumar" class="profile-img">
+            <span class="profile-tag" data-i18n="tag_groom">Groom</span>
+          </div>
+          <div class="profile-details">
+            <h3 class="profile-name" data-i18n="groom_full_name">Chi. Rajesh Mani Kumar</h3>
+            <div class="profile-education">
+              <i class="fas fa-university"></i>
+              <span>IIT, B.Tech.</span>
+            </div>
+            <p class="profile-bio" data-i18n="groom_bio">
+              A dynamic visionary and accomplished IITian with immense passion for engineering and technology. Known for his cheerful smile, warmth, and devotion to family values.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bride Card -->
+        <div class="person-profile-card bride-profile">
+          <div class="profile-frame">
+            <img src="assets/bride_3d_portrait.jpg" id="bride-profile-img" alt="Chi. La. Sow. Nidharshini" class="profile-img">
+            <span class="profile-tag" data-i18n="tag_bride">Bride</span>
+          </div>
+          <div class="profile-details">
+            <h3 class="profile-name" data-i18n="bride_full_name">Chi. La. Sow. Nidharshini</h3>
+            <div class="profile-education">
+              <i class="fas fa-university"></i>
+              <span>IIT, M.Tech.</span>
+            </div>
+            <p class="profile-bio" data-i18n="bride_bio">
+              A graceful, brilliant IIT post-graduate endowed with wisdom, artistic elegance, and boundless positivity. Youngest daughter of Sri Kallakula Pochala Rao & Smt. Sridevi from Bhadrachalam.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: VENUE & LOCATION MAP -->
+    <section class="section-card venue-section" id="venue">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="venue_sec_title">The Wedding Destination</h2>
+        <p class="section-subtitle" data-i18n="venue_sec_subtitle">Where sacred traditions come alive in royal grandeur</p>
+      </div>
+
+      <div class="venue-showcase-box">
+        <div class="venue-info-pane">
+          <div class="venue-badge">
+            <i class="fas fa-map-marker-alt"></i> <span data-i18n="official_venue_badge">Official Venue</span>
+          </div>
+          <h3 class="venue-name" data-i18n="venue_name_text">ARM CONVENTION</h3>
+          <p class="venue-address" data-i18n="venue_address_text">
+            <strong>MG Inner Ring Road, Phase-1</strong><br>
+            Gorantla, Guntur, Andhra Pradesh
+          </p>
+
+          <div class="venue-highlights">
+            <div class="vh-item">
+              <i class="fas fa-parking"></i>
+              <span data-i18n="vh_parking">Spacious Valet Parking Available</span>
+            </div>
+            <div class="vh-item">
+              <i class="fas fa-snowflake"></i>
+              <span data-i18n="vh_ac">Centrally Air-Conditioned Grand Hall</span>
+            </div>
+            <div class="vh-item">
+              <i class="fas fa-road"></i>
+              <span data-i18n="vh_road">Conveniently Connected via MG Inner Ring Road</span>
+            </div>
+          </div>
+
+          <div class="venue-cta-buttons">
+            <a href="https://www.google.com/maps/search/?api=1&query=ARM+CONVENTION+MG+Inner+Ring+Road+Phase-1+Gorantla+Guntur" target="_blank" rel="noopener noreferrer" class="map-btn primary">
+              <i class="fas fa-directions"></i> <span data-i18n="gmaps_btn">Open in Google Maps</span>
+            </a>
+            <button id="copy-address-btn" class="map-btn secondary">
+              <i class="far fa-copy"></i> <span data-i18n="copy_address_btn">Copy Full Address</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="venue-map-pane">
+          <div class="custom-map-card">
+            <iframe 
+              title="ARM Convention Location"
+              src="https://maps.google.com/maps?q=ARM%20Convention%2C%20Gorantla%2C%20Guntur&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="320" 
+              style="border:0; border-radius: 14px;" 
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PHOTO GALLERY & MEMORIES (LAGNA PATRIKA REMOVED AS REQUESTED) -->
+    <section class="section-card gallery-section" id="gallery">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="gallery_sec_title">Glimpses of Joy</h2>
+        <p class="section-subtitle" data-i18n="gallery_sec_subtitle">Moments captured as our journey to forever unfolds</p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Photo 1: 3D Miniature Figurines (Featured) -->
+        <div class="gallery-item-card featured" data-full="assets/couple_3d_miniature_original.jpg" data-caption="3D Miniatures - Chi. Rajesh & Chi. La. Sow. Nidharshini in Traditional Attire">
+          <div class="img-wrapper">
+            <img src="assets/couple_3d_miniature_original.jpg" alt="Rajesh and Nidharshini 3D Miniature Figurines" loading="lazy">
+            <div class="item-overlay">
+              <i class="fas fa-search-plus"></i>
+              <span data-i18n="gallery_miniature_overlay">3D Wedding Miniatures</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h4 data-i18n="gallery_miniature_title">Royal 3D Miniatures</h4>
+            <p data-i18n="gallery_miniature_desc">Cherished handcrafted couple 3D miniatures</p>
+          </div>
+        </div>
+
+        <!-- Photo 2: Garlands & Engagement -->
+        <div class="gallery-item-card" data-full="assets/couple_engagement.jpg" data-caption="Joyous Varmala Moment - Chi. Rajesh & Chi. La. Sow. Nidharshini">
+          <div class="img-wrapper">
+            <img src="assets/couple_engagement.jpg" alt="Rajesh and Nidharshini Garland Ceremony" loading="lazy">
+            <div class="item-overlay">
+              <i class="fas fa-search-plus"></i>
+              <span data-i18n="gallery_varmala_overlay">Varmala Celebration</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h4 data-i18n="gallery_varmala_title">Bond of Love</h4>
+            <p data-i18n="gallery_varmala_desc">Exchange of fragrant garlands amidst loving smiles</p>
+          </div>
+        </div>
+
+        <!-- Photo 3: Traditional Swing (Jhula) -->
+        <div class="gallery-item-card" data-full="assets/couple_traditional.jpg" data-caption="Timeless Heritage - Serene Moments on the Heritage Jhula">
+          <div class="img-wrapper">
+            <img src="assets/couple_traditional.jpg" alt="Rajesh and Nidharshini on Traditional Swing" loading="lazy">
+            <div class="item-overlay">
+              <i class="fas fa-search-plus"></i>
+              <span data-i18n="gallery_jhula_overlay">Heritage Portrait</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <h4 data-i18n="gallery_jhula_title">Traditional Elegance</h4>
+            <p data-i18n="gallery_jhula_desc">Cherishing heritage traditions together</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="image-modal" class="modal-backdrop">
+      <span class="close-modal">&times;</span>
+      <div class="modal-content-wrap">
+        <img class="modal-content" id="modal-image" alt="Enlarged gallery view">
+        <div id="modal-caption" class="modal-caption-text"></div>
+      </div>
+    </div>
+
+    <!-- FOOTER WITH WITH BEST COMPLIMENTS FROM NEAR & DEAR (EXACT ORDER REQUESTED) -->
+    <footer class="invitation-footer">
+      <div class="footer-mandala"></div>
+      
+      <div class="compliments-box">
+        <p class="compliments-title" data-i18n="compliments_title">With Best Compliments from:</p>
+        
+        <!-- 1. First: Dasari Srinivasarao & Parvathi -->
+        <div class="compliment-family-card primary-family">
+          <h3 class="family-head-name" data-i18n="groom_parents_name">
+            Sri Dasari Srinivasa Rao &amp; Smt. Parvathi
+          </h3>
+          <span class="family-relation-label" data-i18n="groom_family_label">(Groom's Parents &amp; Family)</span>
+        </div>
+
+        <!-- 2. Second: Kanukala / Kallakula Family, Bhadrachalam -->
+        <div class="compliment-family-card secondary-family">
+          <h3 class="family-head-name" data-i18n="bride_parents_name">
+            Sri Kallakula Pochala Rao &amp; Smt. Sridevi
+          </h3>
+          <span class="family-place-label" data-i18n="bride_family_label">Bhadrachalam (Bride's Parents &amp; Family)</span>
+        </div>
+
+        <!-- 3. Near & Dear -->
+        <div class="near-and-dear-banner">
+          <h4 class="near-dear-title" data-i18n="near_dear_title">Near &amp; Dear</h4>
+          <p class="near-dear-sub" data-i18n="near_dear_sub">Friends, Well-Wishers &amp; Extended Family</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom-quote">
+        <p class="sacred-chants">॥ శ్రీరస్తు • శుభమస్తు • అవిఘ్నమస్తు ॥ • ॥ ఓం నమో వేంకటేశాయ ॥</p>
+        <p class="copyright-sub" data-i18n="footer_cordial">Cordially inviting you to create lifelong memories together • 27th November 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Three.js 3D WebGL Engine & 3D Walk Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="three-walk.js"></script>
+  <!-- Multilingual & Main Controller Script -->
+  <script src="script.js"></script>
+</body>
+</html>
