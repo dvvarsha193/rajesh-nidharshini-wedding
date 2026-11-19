@@ -2081,9 +2081,11 @@ body[data-lang="te"] .cursive-subtitle {
 body[data-lang="te"] .groom-name,
 body[data-lang="te"] .bride-name {
   font-family: 'Noto Serif Telugu', serif;
-  font-size: clamp(0.8rem, 2.8vw, 1.25rem);
+  font-size: clamp(0.72rem, 2.4vw, 1.25rem);
   font-weight: 800;
   line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 body[data-lang="te"] .section-title {
@@ -2217,16 +2219,60 @@ body[data-lang="te"] .family-head-name {
     height: 280px !important;
     max-width: 85vw !important;
   }
+  /* SACRED TRIO - STRICT SINGLE UNBROKEN LINE ON ALL MOBILES */
   .sacred-trio {
-    gap: 6px !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 2px !important;
+    margin: 0 auto 18px !important;
     width: 100% !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  .sacred-trio .trio-item {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0 1px !important;
+    box-sizing: border-box !important;
+  }
+  .sacred-trio .trio-divider {
+    flex: 0 0 auto !important;
+    font-size: clamp(0.45rem, 1.8vw, 0.7rem) !important;
+    margin: 0 !important;
+    padding: 0 1px !important;
+    opacity: 0.6 !important;
+    color: var(--gold-primary) !important;
   }
   .trio-item .telugu-head,
   .trio-item .devanagari {
-    font-size: clamp(0.95rem, 3.8vw, 1.25rem) !important;
+    font-size: clamp(0.68rem, 2.3vw, 0.95rem) !important;
+    white-space: nowrap !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    letter-spacing: 0 !important;
+  }
+  .trio-item .translit {
+    font-size: clamp(0.42rem, 1.5vw, 0.58rem) !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.3px !important;
+    text-align: center !important;
+    line-height: 1.1 !important;
+    margin-top: 2px !important;
+  }
+  .sacred-trio .divine-icon-wrap {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 0.65rem !important;
+    margin: 0 auto 2px !important;
   }
   .formal-salutation .cursive-subtitle {
     font-size: 2.1rem;
@@ -2235,6 +2281,7 @@ body[data-lang="te"] .family-head-name {
     font-size: 0.88rem;
     padding: 0 4px;
   }
+  /* COUPLE HERO NAMES - PERFECT CONTAINMENT & EQUAL SIZING */
   .couple-hero-names {
     display: flex !important;
     flex-direction: row !important;
@@ -2250,9 +2297,9 @@ body[data-lang="te"] .family-head-name {
   .groom-hero-card, .bride-hero-card {
     flex: 1 1 0 !important;
     min-width: 0 !important;
-    width: 50% !important;
-    max-width: 50% !important;
-    padding: 12px 4px !important;
+    width: calc(50% - 10px) !important;
+    max-width: calc(50% - 10px) !important;
+    padding: 10px 4px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
@@ -2260,6 +2307,7 @@ body[data-lang="te"] .family-head-name {
     text-align: center !important;
     box-sizing: border-box !important;
     border-radius: 12px !important;
+    overflow: hidden !important;
   }
   .wedding-knot-symbol {
     flex: 0 0 auto !important;
@@ -2270,27 +2318,27 @@ body[data-lang="te"] .family-head-name {
     margin: 0 -8px !important;
   }
   .knot-circle {
-    width: 34px !important;
-    height: 34px !important;
+    width: 32px !important;
+    height: 32px !important;
     border-radius: 50% !important;
     box-shadow: 0 2px 6px rgba(0,0,0,0.18) !important;
     border: 1px solid rgba(255, 255, 255, 0.7) !important;
   }
   .knot-circle .knot-with {
-    font-size: 0.68rem !important;
+    font-size: 0.65rem !important;
     line-height: 0.8 !important;
   }
   .knot-circle .knot-icon {
-    font-size: 0.68rem !important;
+    font-size: 0.65rem !important;
     line-height: 0.8 !important;
   }
   .honorific {
-    min-height: 22px !important;
+    min-height: 20px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: clamp(0.65rem, 2.2vw, 0.78rem) !important;
-    margin-bottom: 4px !important;
+    font-size: clamp(0.62rem, 2vw, 0.74rem) !important;
+    margin-bottom: 3px !important;
     text-align: center !important;
   }
   .groom-name, .bride-name {
@@ -2298,23 +2346,42 @@ body[data-lang="te"] .family-head-name {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-height: 46px !important;
-    font-size: clamp(0.8rem, 2.8vw, 1.05rem) !important;
+    min-height: 42px !important;
+    font-size: clamp(0.72rem, 2.4vw, 0.95rem) !important;
     line-height: 1.15 !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 5px !important;
     word-break: break-word !important;
-    overflow-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
     text-align: center !important;
     hyphens: auto !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
   }
   .credentials-badge {
     margin-top: auto !important;
-    font-size: clamp(0.58rem, 1.9vw, 0.72rem) !important;
-    padding: 3px 6px !important;
+    font-size: clamp(0.52rem, 1.7vw, 0.66rem) !important;
+    padding: 2px 5px !important;
     white-space: nowrap !important;
     border-radius: 16px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  /* COUNTDOWN - ZERO OVERFLOW & GUARANTEED FIT */
+  .countdown-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    margin-top: 22px !important;
+    padding-top: 16px !important;
+  }
+  .countdown-title {
+    font-size: clamp(0.78rem, 2.5vw, 0.92rem) !important;
+    letter-spacing: 0.8px !important;
+    margin-bottom: 12px !important;
+    white-space: normal !important;
+    text-align: center !important;
   }
   .countdown-grid {
     display: flex !important;
@@ -2323,32 +2390,54 @@ body[data-lang="te"] .family-head-name {
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    max-width: 380px !important;
-    gap: 4px !important;
-    margin: 0 auto 16px !important;
+    max-width: 100% !important;
+    gap: 3px !important;
+    margin: 0 auto 12px !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .count-box {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     width: auto !important;
-    max-width: 78px !important;
-    padding: 7px 2px !important;
+    max-width: 72px !important;
+    padding: 6px 1px !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .count-number {
-    font-size: clamp(1.1rem, 4.8vw, 1.45rem) !important;
+    font-size: clamp(0.95rem, 4.2vw, 1.3rem) !important;
     line-height: 1 !important;
   }
   .count-unit {
-    font-size: clamp(0.48rem, 1.7vw, 0.6rem) !important;
-    margin-top: 3px !important;
-    letter-spacing: 0.2px !important;
+    font-size: clamp(0.42rem, 1.5vw, 0.54rem) !important;
+    margin-top: 2px !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
   }
   .count-divider {
-    font-size: clamp(0.85rem, 3.5vw, 1.2rem) !important;
+    font-size: clamp(0.72rem, 3vw, 1rem) !important;
     flex: 0 0 auto !important;
     margin: 0 !important;
+    padding: 0 1px !important;
+  }
+  .countdown-date-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+    width: auto !important;
+    padding: 4px 10px !important;
+    border-radius: 18px !important;
+    font-size: clamp(0.62rem, 2.1vw, 0.76rem) !important;
+    line-height: 1.25 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
   .section-card {
     padding: 26px 12px !important;
@@ -2469,31 +2558,45 @@ body[data-lang="te"] .family-head-name {
     font-size: 0.7rem !important;
     letter-spacing: 0.3px !important;
   }
+  .trio-item .telugu-head,
+  .trio-item .devanagari {
+    font-size: 0.65rem !important;
+  }
+  .trio-item .translit {
+    font-size: 0.40rem !important;
+  }
   .groom-name, .bride-name {
-    font-size: 0.88rem !important;
-    min-height: 50px !important;
+    font-size: 0.72rem !important;
+    min-height: 38px !important;
   }
   .groom-hero-card, .bride-hero-card {
-    padding: 10px 4px !important;
+    padding: 8px 3px !important;
+    width: calc(50% - 8px) !important;
+    max-width: calc(50% - 8px) !important;
   }
   .credentials-badge {
-    font-size: 0.58rem !important;
+    font-size: 0.50rem !important;
     padding: 2px 4px !important;
   }
   .countdown-grid {
     gap: 2px !important;
   }
   .count-box {
+    max-width: 65px !important;
     padding: 5px 1px !important;
   }
   .count-number {
-    font-size: 1.05rem !important;
+    font-size: 0.95rem !important;
   }
   .count-unit {
-    font-size: 0.46rem !important;
+    font-size: 0.38rem !important;
   }
   .count-divider {
-    font-size: 0.8rem !important;
+    font-size: 0.70rem !important;
+  }
+  .countdown-date-badge {
+    font-size: 0.60rem !important;
+    padding: 3px 8px !important;
   }
   .miniature-label-card {
     padding: 3px 4px !important;
