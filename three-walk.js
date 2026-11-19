@@ -47,16 +47,17 @@ class Royal3DStage {
     this.camera.position.set(0, 2.0, isMobile ? 7.7 : 7.2);
     this.camera.lookAt(0, 1.25, 0);
 
-    // 2. WebGL Renderer
+    // 2. WebGL Renderer - High Clarity & Smooth Performance
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.0);
     this.renderer = new THREE.WebGLRenderer({
-      antialias: !isMobile,
+      antialias: true,
       alpha: true,
       powerPreference: 'high-performance'
     });
     this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.5));
+    this.renderer.setPixelRatio(dpr);
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
     this.container.appendChild(this.renderer.domElement);
@@ -91,8 +92,8 @@ class Royal3DStage {
     const mainLight = new THREE.DirectionalLight(0xFFF0DE, 1.1);
     mainLight.position.set(1.5, 7, 5);
     mainLight.castShadow = true;
-    mainLight.shadow.mapSize.width = isMobile ? 512 : 1024;
-    mainLight.shadow.mapSize.height = isMobile ? 512 : 1024;
+    mainLight.shadow.mapSize.width = 1024;
+    mainLight.shadow.mapSize.height = 1024;
     mainLight.shadow.bias = -0.001;
     this.scene.add(mainLight);
 
@@ -219,9 +220,12 @@ class Royal3DStage {
     this.groomGroup.position.set(-0.85, 0, -11);
 
     textureLoader.load('assets/groom_3d_real_miniature.png', (texture) => {
-      texture.minFilter = THREE.LinearFilter;
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.magFilter = THREE.LinearFilter;
-      texture.generateMipmaps = false;
+      if (this.renderer && this.renderer.capabilities.getMaxAnisotropy) {
+        texture.anisotropy = Math.min(this.renderer.capabilities.getMaxAnisotropy(), 4);
+      }
 
       const mat = new THREE.MeshStandardMaterial({
         map: texture,
@@ -257,9 +261,12 @@ class Royal3DStage {
     this.brideGroup.position.set(0.85, 0, -11);
 
     textureLoader.load('assets/bride_3d_real_miniature.png', (texture) => {
-      texture.minFilter = THREE.LinearFilter;
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.magFilter = THREE.LinearFilter;
-      texture.generateMipmaps = false;
+      if (this.renderer && this.renderer.capabilities.getMaxAnisotropy) {
+        texture.anisotropy = Math.min(this.renderer.capabilities.getMaxAnisotropy(), 4);
+      }
 
       const mat = new THREE.MeshStandardMaterial({
         map: texture,
@@ -352,6 +359,8 @@ class Royal3DStage {
 
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.0);
+    this.renderer.setPixelRatio(dpr);
   }
 
   flyIntoPalace(onComplete) {
