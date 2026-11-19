@@ -28,27 +28,35 @@ class Royal3DStage {
     this.walkSpeed = 0.22;
     this.isCameraFlying = false;
 
+    this.isPaused = false;
+    this.animFrameId = null;
+
     this.init();
   }
 
   init() {
     const width = this.container.clientWidth || window.innerWidth;
     const height = this.container.clientHeight || (window.innerHeight * 0.58);
+    const isMobile = window.innerWidth < 768;
 
     // 1. Scene & Atmosphere
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.FogExp2(0x3B050E, 0.04);
 
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    this.camera.position.set(0, 2.0, 7.2);
+    this.camera.position.set(0, 2.0, isMobile ? 7.7 : 7.2);
     this.camera.lookAt(0, 1.25, 0);
 
     // 2. WebGL Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    this.renderer = new THREE.WebGLRenderer({
+      antialias: !isMobile,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
     this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.5));
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
     this.container.appendChild(this.renderer.domElement);
@@ -76,14 +84,15 @@ class Royal3DStage {
   }
 
   setupLighting() {
+    const isMobile = window.innerWidth < 768;
     const ambient = new THREE.AmbientLight(0xFFE5D0, 1.05);
     this.scene.add(ambient);
 
     const mainLight = new THREE.DirectionalLight(0xFFF0DE, 1.1);
     mainLight.position.set(1.5, 7, 5);
     mainLight.castShadow = true;
-    mainLight.shadow.mapSize.width = 1024;
-    mainLight.shadow.mapSize.height = 1024;
+    mainLight.shadow.mapSize.width = isMobile ? 512 : 1024;
+    mainLight.shadow.mapSize.height = isMobile ? 512 : 1024;
     mainLight.shadow.bias = -0.001;
     this.scene.add(mainLight);
 
@@ -277,7 +286,8 @@ class Royal3DStage {
   }
 
   buildFloatingPetals() {
-    const petalCount = 75;
+    const isMobile = window.innerWidth < 768;
+    const petalCount = isMobile ? 22 : 75;
     const colors = [0xDA2944, 0xFF9933, 0xFFD700, 0xF7CAC9];
 
     for (let i = 0; i < petalCount; i++) {
@@ -400,8 +410,25 @@ class Royal3DStage {
     }
   }
 
+  pause() {
+    this.isPaused = true;
+    if (this.animFrameId) {
+      cancelAnimationFrame(this.animFrameId);
+      this.animFrameId = null;
+    }
+  }
+
+  resume() {
+    if (this.isPaused) {
+      this.isPaused = false;
+      this.clock.getDelta(); // flush delta so figurines do not jump
+      this.animate();
+    }
+  }
+
   animate() {
-    requestAnimationFrame(() => this.animate());
+    if (this.isPaused) return;
+    this.animFrameId = requestAnimationFrame(() => this.animate());
 
     const delta = this.clock.getDelta();
     const time = this.clock.getElapsedTime();

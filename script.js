@@ -250,8 +250,9 @@ function initPetalsCanvas() {
     height = canvas.height = window.innerHeight;
   });
 
+  const isMobile = window.innerWidth < 768;
   const petals = [];
-  const petalCount = 26;
+  const petalCount = isMobile ? 12 : 24;
   const colors = [
     { r: 218, g: 41, b: 68 },   // Rose Red
     { r: 255, g: 153, b: 51 },  // Marigold Orange
@@ -263,22 +264,30 @@ function initPetalsCanvas() {
     petals.push({
       x: Math.random() * width,
       y: Math.random() * height - height,
-      size: Math.random() * 8 + 6,
-      speedY: Math.random() * 1.5 + 0.8,
-      speedX: Math.random() * 1 - 0.5,
+      size: Math.random() * (isMobile ? 5 : 7) + 5,
+      speedY: Math.random() * 1.1 + 0.6,
+      speedX: Math.random() * 0.8 - 0.4,
       rotation: Math.random() * 360,
-      rotSpeed: Math.random() * 1.5 - 0.75,
+      rotSpeed: Math.random() * 1.2 - 0.6,
       color: colors[Math.floor(Math.random() * colors.length)],
-      opacity: Math.random() * 0.5 + 0.4
+      opacity: Math.random() * 0.4 + 0.35
     });
   }
 
+  let isCanvasActive = true;
+  document.addEventListener('visibilitychange', () => {
+    isCanvasActive = !document.hidden;
+    if (isCanvasActive) requestAnimationFrame(draw);
+  });
+
   function draw() {
+    if (!isCanvasActive) return;
     ctx.clearRect(0, 0, width, height);
 
-    petals.forEach(p => {
+    for (let i = 0; i < petals.length; i++) {
+      const p = petals[i];
       p.y += p.speedY;
-      p.x += Math.sin(p.y * 0.01) * 0.8 + p.speedX;
+      p.x += Math.sin(p.y * 0.01) * 0.6 + p.speedX;
       p.rotation += p.rotSpeed;
 
       if (p.y > height + 20) {
@@ -294,7 +303,7 @@ function initPetalsCanvas() {
       ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity})`;
       ctx.fill();
       ctx.restore();
-    });
+    }
 
     requestAnimationFrame(draw);
   }
@@ -383,9 +392,12 @@ function initMiniatureIntro() {
       window.royal3DStage.flyIntoPalace();
     }
 
-    // Hide overlay completely and scroll smoothly into main content
+    // Hide overlay completely, pause Three.js background rendering, and scroll smoothly into main content
     setTimeout(() => {
       introOverlay.style.display = 'none';
+      if (window.royal3DStage && typeof window.royal3DStage.pause === 'function') {
+        window.royal3DStage.pause();
+      }
       const mainEl = document.getElementById('main-content');
       if (mainEl) {
         mainEl.scrollIntoView({ behavior: 'smooth' });
@@ -414,8 +426,13 @@ function initMiniatureIntro() {
       if (curtainLeft) curtainLeft.classList.add('open');
       if (curtainRight) curtainRight.classList.add('open');
 
-      if (window.royal3DStage && typeof window.royal3DStage.replayWalk === 'function') {
-        window.royal3DStage.replayWalk();
+      if (window.royal3DStage) {
+        if (typeof window.royal3DStage.resume === 'function') {
+          window.royal3DStage.resume();
+        }
+        if (typeof window.royal3DStage.replayWalk === 'function') {
+          window.royal3DStage.replayWalk();
+        }
       }
 
       if (window.weddingAmbience && !window.weddingAmbience.isPlaying) {
