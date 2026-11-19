@@ -405,13 +405,70 @@ function initMiniatureIntro() {
     }, 600);
   }
 
-  enterBtn.addEventListener('click', openInvitation);
+  // 1. Direct Tap / Click triggers on Button and Skip Hint
+  ['click', 'touchend', 'pointerup'].forEach(evt => {
+    enterBtn.addEventListener(evt, (e) => {
+      e.preventDefault();
+      openInvitation();
+    });
+  });
 
   const skipHint = document.querySelector('.skip-hint');
   if (skipHint) {
     skipHint.style.cursor = 'pointer';
-    skipHint.addEventListener('click', openInvitation);
+    ['click', 'touchend', 'pointerup'].forEach(evt => {
+      skipHint.addEventListener(evt, (e) => {
+        e.preventDefault();
+        openInvitation();
+      });
+    });
   }
+
+  // Also tap speech bubble to enter
+  const speechBubble = document.getElementById('speech-bubble');
+  if (speechBubble) {
+    speechBubble.style.cursor = 'pointer';
+    speechBubble.addEventListener('click', openInvitation);
+  }
+
+  // 2. Gesture Scroll / Swipe Down Triggers to Enter
+  let touchStartY = null;
+  window.addEventListener('touchstart', (e) => {
+    if (introOverlay.style.display !== 'none' && !introOverlay.classList.contains('dismissed')) {
+      if (e.touches && e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (touchStartY !== null && introOverlay.style.display !== 'none' && !introOverlay.classList.contains('dismissed')) {
+      if (e.touches && e.touches.length > 0) {
+        const deltaY = touchStartY - e.touches[0].clientY;
+        // Natural scroll-down gesture (swiping finger up by > 35px)
+        if (deltaY > 35) {
+          touchStartY = null;
+          openInvitation();
+        }
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('wheel', (e) => {
+    if (introOverlay.style.display !== 'none' && !introOverlay.classList.contains('dismissed')) {
+      if (e.deltaY > 15) {
+        openInvitation();
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('keydown', (e) => {
+    if (introOverlay.style.display !== 'none' && !introOverlay.classList.contains('dismissed')) {
+      if (['ArrowDown', 'PageDown', 'Space', 'Enter'].includes(e.code)) {
+        openInvitation();
+      }
+    }
+  });
 
   // Allow replaying 3D walk
   if (replayBtn) {

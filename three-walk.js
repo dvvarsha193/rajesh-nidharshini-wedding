@@ -75,10 +75,16 @@ class Royal3DStage {
     // 6. Floating 3D Flower Petals & Diyas
     this.buildFloatingPetals();
 
-    // 7. Handlers
+    // 7. Interactive Depth Handlers (Mouse, Touch & Mobile Device Tilt Gyroscope)
     window.addEventListener('resize', () => this.onResize());
     window.addEventListener('mousemove', (e) => this.onMouseMove(e));
     window.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: true });
+    window.addEventListener('deviceorientation', (e) => this.onDeviceOrientation(e));
+
+    // Also listen directly on the 3D stage container for touch interaction
+    if (this.container) {
+      this.container.addEventListener('pointermove', (e) => this.onMouseMove(e));
+    }
 
     // 8. Render Loop
     this.animate();
@@ -326,17 +332,28 @@ class Royal3DStage {
   onMouseMove(e) {
     this.mouseX = (e.clientX / window.innerWidth) * 2 - 1;
     this.mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-    this.targetCameraX = this.mouseX * 0.7;
-    this.targetCameraY = 2.0 + this.mouseY * 0.3;
+    this.targetCameraX = this.mouseX * 1.6;
+    this.targetCameraY = 2.0 + this.mouseY * 0.7;
   }
 
   onTouchMove(e) {
-    if (e.touches.length > 0) {
+    if (e.touches && e.touches.length > 0) {
       const t = e.touches[0];
       this.mouseX = (t.clientX / window.innerWidth) * 2 - 1;
       this.mouseY = -(t.clientY / window.innerHeight) * 2 + 1;
-      this.targetCameraX = this.mouseX * 0.7;
-      this.targetCameraY = 2.0 + this.mouseY * 0.3;
+      this.targetCameraX = this.mouseX * 1.6;
+      this.targetCameraY = 2.0 + this.mouseY * 0.7;
+    }
+  }
+
+  onDeviceOrientation(e) {
+    if (e.gamma !== null && e.beta !== null) {
+      // Gamma is left-to-right tilt in degrees [-90, 90]
+      // Beta is front-to-back tilt in degrees [-180, 180] (normal holding angle is ~45deg)
+      const gamma = Math.min(Math.max(e.gamma, -40), 40) / 40;
+      const beta = Math.min(Math.max(e.beta - 45, -35), 35) / 35;
+      this.targetCameraX = gamma * 1.6;
+      this.targetCameraY = 2.0 - beta * 0.7;
     }
   }
 
@@ -481,8 +498,9 @@ class Royal3DStage {
     }
 
     if (!this.isCameraFlying) {
-      this.camera.position.x += (this.targetCameraX - this.camera.position.x) * 0.05;
-      this.camera.position.y += (this.targetCameraY - this.camera.position.y) * 0.05;
+      this.camera.position.x += (this.targetCameraX - this.camera.position.x) * 0.08;
+      this.camera.position.y += (this.targetCameraY - this.camera.position.y) * 0.08;
+      this.camera.rotation.z = -this.camera.position.x * 0.035;
       this.camera.lookAt(0, 1.25, 0.5);
     }
 

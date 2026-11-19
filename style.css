@@ -671,6 +671,22 @@ body {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  animation: royalBtnPulse 2.4s infinite ease-in-out;
+}
+
+.royal-open-btn * {
+  pointer-events: none;
+}
+
+@keyframes royalBtnPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 12px 38px rgba(255, 215, 0, 0.85);
+  }
 }
 
 .royal-open-btn:hover {
@@ -2125,11 +2141,29 @@ body[data-lang="te"] .family-head-name {
     max-width: 100% !important;
     overflow-x: hidden !important;
   }
+  .top-header-controls {
+    top: 8px !important;
+    right: 8px !important;
+    gap: 6px !important;
+    z-index: 10005 !important;
+  }
+  .miniature-intro-overlay {
+    align-items: flex-start !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 56px 6px 30px !important;
+    box-sizing: border-box !important;
+  }
   .intro-royal-hall {
-    padding: 58px 10px 20px !important;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    margin: 0 auto !important;
+    padding: 16px 8px 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .intro-blessing-text {
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
   }
   .three-stage-wrapper {
     height: 300px;
